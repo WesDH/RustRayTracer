@@ -8,6 +8,7 @@ mod chapters {
 
 mod testing {
     pub mod tuples_test;
+    pub mod canvas_test;
 }
 
 // Operations on vectors and points:
