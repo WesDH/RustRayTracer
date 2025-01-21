@@ -1,11 +1,13 @@
 use crate::features::tuples;
 use std::{thread, time};
 
+
 #[derive(Clone, Copy)]
 pub struct Projectile {
     pub position: tuples::Tuple, // -> point
     pub velocity: tuples::Tuple, // -> vector
 }
+
 
 #[derive(Clone, Copy)]
 pub struct Environment {
@@ -13,6 +15,7 @@ pub struct Environment {
     pub wind: tuples::Tuple,    // -> vector
 }
 
+#[allow(dead_code)]
 pub fn run() {
     // End of chapter 1 exercise
 
@@ -30,27 +33,32 @@ pub fn run() {
         wind: tuples::vector(-0.01, 0., 0.),
     };
 
-
     while cannon_ball.position.y > -2. {
         println!("===========");
-        println!("Cannon ball position on x axis is {}", cannon_ball.position.x);
-        println!("Cannon ball position on y axis is {}", cannon_ball.position.y);
-        println!("Cannon ball position on z axis is {}", cannon_ball.position.z);
+        println!(
+            "Cannon ball position on x axis is {}",
+            cannon_ball.position.x
+        );
+        println!(
+            "Cannon ball position on y axis is {}",
+            cannon_ball.position.y
+        );
+        println!(
+            "Cannon ball position on z axis is {}",
+            cannon_ball.position.z
+        );
         println!("Cannon ball velocity it {}", cannon_ball.position.z);
         cannon_ball = tick(cannon_ball, e);
-        thread::sleep(one_second);  // For now, sleep is the 'tick'
+        thread::sleep(one_second); // For now, sleep is the 'tick'
     }
-
 
     println!("Cannon ball finished falling!")
 }
 
 pub fn tick(mut projectiles: Projectile, env: Environment) -> Projectile {
-
     // Update position with cur velocity
-    let mut pos = tuples::add(projectiles.position, projectiles.velocity);
+    let pos = tuples::add(projectiles.position, projectiles.velocity);
     projectiles.position = pos.unwrap();
-
 
     // Update projectiles.velocity with wind and gravity vectors
     let add_wind = tuples::add(projectiles.velocity, env.wind);
@@ -58,5 +66,4 @@ pub fn tick(mut projectiles: Projectile, env: Environment) -> Projectile {
     projectiles.velocity = add_wind_grav.unwrap();
 
     projectiles
-
 }

@@ -9,6 +9,13 @@ pub struct Tuple {
     pub w: f64,
 }
 
+#[derive(Clone, Copy)]
+pub struct Color {
+    pub r: f64,
+    pub g: f64,
+    pub b: f64,
+}
+
 pub fn point(x: f64, y: f64, z: f64) -> Tuple {
     let point = Tuple { x, y, z, w: 1. };
     point
@@ -17,6 +24,11 @@ pub fn point(x: f64, y: f64, z: f64) -> Tuple {
 pub fn vector(x: f64, y: f64, z: f64) -> Tuple {
     let vector = Tuple { x, y, z, w: 0. };
     vector
+}
+
+pub fn color(r: f64, g: f64, b: f64) -> Color {
+    let color = Color { r, g, b };
+    color
 }
 
 pub fn equals_fl(a: f64, b: f64) -> bool {
@@ -166,4 +178,21 @@ pub fn cross(v1: Tuple, v2: Tuple) -> Tuple {
         v1.z * v2.x - v1.x * v2.z,
         v1.x * v2.y - v1.y * v2.x,
     )
+}
+
+pub fn add_color(c1: Color, c2: Color) -> Color {
+    color(c1.r + c2.r, c1.g + c2.g, c1.b + c2.b)
+}
+
+pub fn sub_color(c1: Color, c2: Color) -> Color {
+    color(c1.r - c2.r, c1.g - c2.g, c1.b - c2.b)
+}
+
+pub fn scale_color(c1: Color, s: f64) -> Color {
+    color(c1.r * s, c1.g * s, c1.b * s)
+}
+
+pub fn mult_color(c1: Color, c2: Color) -> Color {
+    // Technically multiply colors is called the Hadamard product (or Schur product)
+    color(c1.r * c2.r, c1.g * c2.g, c1.b * c2.b)
 }

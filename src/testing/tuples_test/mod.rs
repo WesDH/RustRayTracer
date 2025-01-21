@@ -329,4 +329,52 @@ mod tests {
         assert!((-2. - EPSILON / 2. < cp_b.y) && (cp_b.y < -2. + EPSILON / 2.));
         assert!((1. - EPSILON / 2. < cp_b.z) && (cp_b.z < 1. + EPSILON / 2.));
     }
+
+    #[test]
+    fn test_color_tuple() {
+        let c = tuples::color(-0.5, 0.4, 1.7);
+
+        assert_eq!(c.r, -0.5);
+        assert_eq!(c.g, 0.4);
+        assert_eq!(c.b, 1.7);
+    }
+
+    #[test]
+    fn test_add_color() {
+        let c1 = tuples::color(0.9, 0.6, 0.75);
+        let c2 = tuples::color(0.7, 0.1, 0.25);
+        let res = tuples::add_color(c1, c2);
+        assert_eq!(res.r, 1.6);
+        assert_eq!(res.g, 0.7);
+        assert_eq!(res.b, 1.0);
+    }
+
+    #[test]
+    fn test_subtract_color() {
+        let c1 = tuples::color(0.9, 0.6, 0.75);
+        let c2 = tuples::color(0.7, 0.1, 0.25);
+        let res = tuples::sub_color(c1, c2);
+        assert!(res.r < 0.2 + EPSILON / 2. && res.r > 0.2 - EPSILON / 2.);
+        assert!(res.g < 0.5 + EPSILON / 2. && res.g > 0.5 - EPSILON / 2.);
+        assert!(res.b < 0.5 + EPSILON / 2. && res.b > 0.5 - EPSILON / 2.);
+    }
+
+    #[test]
+    fn test_scale_color() {
+        let c1 = tuples::color(0.2, 0.3, 0.4);
+        let res = tuples::scale_color(c1, 2.);
+        assert!(res.r < 0.4 + EPSILON / 2. && res.r > 0.4 - EPSILON / 2.);
+        assert!(res.g < 0.6 + EPSILON / 2. && res.g > 0.6 - EPSILON / 2.);
+        assert!(res.b < 0.8 + EPSILON / 2. && res.b > 0.8 - EPSILON / 2.);
+    }
+
+    #[test]
+    fn test_multiply_color() {
+        let c1 = tuples::color(1., 0.2, 0.4);
+        let c2 = tuples::color(0.9, 1., 0.1);
+        let res = tuples::mult_color(c1, c2);
+        assert!(res.r < 0.9 + EPSILON / 2. && res.r > 0.9 - EPSILON / 2.);
+        assert!(res.g < 0.2 + EPSILON / 2. && res.g > 0.2 - EPSILON / 2.);
+        assert!(res.b < 0.04 + EPSILON / 2. && res.b > 0.04 - EPSILON / 2.);
+    }
 }

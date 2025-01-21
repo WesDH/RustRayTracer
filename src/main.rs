@@ -1,5 +1,6 @@
 mod features {
     pub mod tuples;
+    pub mod canvas;
 }
 mod chapters {
     pub mod ch_01_tuples_points_vectors;
@@ -15,7 +16,8 @@ mod testing {
 #[allow(dead_code)]
 fn main() {
     println!("Hello, world!");
-    chapters::ch_01_tuples_points_vectors::run();
-    // let p1 = point(0.1,0.2, 0.3);
-    // let v1 = vector(0.1,0.2, 0.3);
+    // Uncomment following to run exercises for each chapter
+
+    //chapters::ch_01_tuples_points_vectors::run();
+
 }
